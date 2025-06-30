@@ -168,16 +168,17 @@ if __name__ == "__main__":
         
         print(error_message)
         os.environ["CHALLENGE_ERRORS"] = error_message
-        
+
+    except requests.exceptions.HTTPError as err: 
         if response.status_code in EVALAI_ERROR_CODES:
-            is_token_valid = validate_token(response.json())
-            if is_token_valid:
-                error = response.json()["error"]
-                error_message = "\nFollowing errors occurred while validating the challenge config:\n{}".format(
-                    error
-                )
-                print(error_message)
-                os.environ["CHALLENGE_ERRORS"] = error_message
+                is_token_valid = validate_token(response.json())
+                if is_token_valid:
+                    error = response.json()["error"]
+                    error_message = "\nFollowing errors occurred while validating the challenge config:\n{}".format(
+                        error
+                    )
+                    print(error_message)
+                    os.environ["CHALLENGE_ERRORS"] = error_message
         else:
             print(
                 "\nFollowing errors occurred while validating the challenge config: {}".format(
