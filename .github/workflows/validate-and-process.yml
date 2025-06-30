@@ -130,6 +130,7 @@ jobs:
             echo "💡 Continuing without runner verification..."
             echo "   If you don't have a self-hosted runner, the next job will fail"
             echo "   Make sure GITHUB_TOKEN has 'repo' or 'actions:read' permissions"
+          fi
           
           # Check 2: Test Docker availability (using a self-hosted runner briefly)
           echo ""
